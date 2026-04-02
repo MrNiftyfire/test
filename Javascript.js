@@ -413,7 +413,7 @@ const customResponses = {
 // =============================
 async function sendMessage(message) {
   try {
-    const res = await fetch("https://ai-chatbot-nine-amber.vercel.app/api/chat", {
+    const res = await fetch("api/chat.js", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
