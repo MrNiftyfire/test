@@ -413,7 +413,7 @@ const customResponses = {
 // =============================
 async function sendMessage(message) {
   try {
-    const res = await fetch("/api/chat.js", {
+    const res = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -447,7 +447,15 @@ if (chatInput && chatMessages) {
       addChat("You", userText);
       chatInput.value = "";
 
-const reply = await sendMessage(userText);
+const match = findClosestMatch(userText.toLowerCase());
+
+let reply;
+
+if (match && customResponses[match]) {
+  reply = customResponses[match];
+} else {
+  reply = await sendMessage(userText);
+}
 
       setTimeout(() => {
         addChat("Bot", reply);
